@@ -22,7 +22,8 @@ public class NumberParserTest {
         return List.of(
                 "1,a,3,4,5,6",
                 "1,,3,4,5,6",
-                "1.2.3.4.5.6"
+                "1.2.3.4.5.6",
+                "1,2,3,4,5,"
         );
     }
 
