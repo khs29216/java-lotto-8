@@ -6,7 +6,7 @@ public class InputValidator {
     private static final String ERROR_WITH_WHITE_SPACE = "[ERROR] 입력값에 공백이 포함되어 있습니다.";
     private static final String ERROR_NUMERIC_ONLY = "[ERROR] 입력값으로 숫자만 입력할 수 있습니다.";
     private static final String ERROR_POSITIVE_AMOUNT = "[ERROR] 구매 금액은 0보다 커야 합니다.";
-    private static final String ERROR_DIVISIBLE_BY_THOUSAND = "[ERROR] 입력값으로 숫자만 입력할 수 있습니다.";
+    private static final String ERROR_DIVISIBLE_BY_THOUSAND = "[ERROR] 구매 금액은 1,000원으로 나누어 떨어져야합니다.";
 
     private InputValidator() {
     }
