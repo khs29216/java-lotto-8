@@ -8,4 +8,8 @@ public class LottoPurchaser {
         InputValidator.validateDivisibleByThousand(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
     }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
 }
