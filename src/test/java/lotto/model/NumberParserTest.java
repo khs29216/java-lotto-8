@@ -1,5 +1,6 @@
 package lotto.model;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -7,9 +8,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class NumberParserTest {
+
     private static List<String> provideInvalidInput() {
         return List.of(
                 "",         // 빈 문자열
@@ -27,11 +29,37 @@ public class NumberParserTest {
         );
     }
 
+    @Test
+    public void 정상적인_입력값일_경우_문자열을_int로_파싱한다() {
+        // given
+        String input = "14000";
+        int expectedInt = 14000;
+
+        // when
+        int actualInt = NumberParser.parseAndValidateInt(input);
+
+        // then
+        assertThat(actualInt).isEqualTo(expectedInt);
+    }
+
     @ParameterizedTest
     @MethodSource("provideInvalidInput")
     public void 숫자가_아닌_다른_값이_입력값에_포함되어_있으면_예외가_발생한다(String input) {
         assertThatThrownBy(() -> NumberParser.parseAndValidateInt(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void 정상적인_입력값일_경우_문자열을_리스트로_파싱한다() {
+        // given
+        String numbers = "1,2,3,4,5,6";
+        List<Integer> expectedNumbers = List.of(1, 2, 3, 4, 5, 6);
+
+        // when
+        List<Integer> actualNumbers = NumberParser.parseAndValidateNumbers(numbers);
+
+        // then
+        assertThat(actualNumbers).isEqualTo(expectedNumbers);
     }
 
     @ParameterizedTest
