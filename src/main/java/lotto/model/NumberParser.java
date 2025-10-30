@@ -13,8 +13,8 @@ public class NumberParser {
         return Integer.parseInt(input);
     }
 
-    public static List<Integer> parseAndValidateNumbers(String input) {
-        return Arrays.stream(input.split(","))
+    public static List<Integer> parseAndValidateNumbers(String numbers) {
+        return Arrays.stream(numbers.split(","))
                 .map(NumberParser::parseAndValidateInt)
                 .toList();
     }
