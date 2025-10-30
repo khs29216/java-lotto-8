@@ -12,4 +12,9 @@ public class InputView {
         System.out.println(INPUT_PURCHASE_AMOUNT_MESSAGE);
         return Console.readLine();
     }
+
+    public String inputWinningNumbers() {
+        System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
+        return Console.readLine();
+    }
 }
