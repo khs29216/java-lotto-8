@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
@@ -17,6 +18,20 @@ class LottoTest {
                 List.of(0, 1, 2, 3, 4, 47),
                 List.of(1, 2, 3, 4, 5, 100)
         );
+    }
+
+    @Test
+    void 로또_번호를_정상_입력했을_때_Lotto_객체를_생성한다() {
+        // given
+        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto expected = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        // when
+        Lotto actual = new Lotto(numbers);
+
+        // then
+        assertThat(actual.getNumbers())
+                .isEqualTo(expected.getNumbers());
     }
 
     @Test
