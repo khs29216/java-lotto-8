@@ -14,7 +14,7 @@ public class NumberParser {
     }
 
     public static List<Integer> parseAndValidateNumbers(String numbers) {
-        return Arrays.stream(numbers.split(","))
+        return Arrays.stream(numbers.split(",", -1))
                 .map(NumberParser::parseAndValidateInt)
                 .toList();
     }
