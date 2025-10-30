@@ -20,7 +20,8 @@ public class Controller {
         LottoPurchaser lottoPurchaser = new LottoPurchaser(purchaseAmount);
 
         List<Integer> winningNumbers = NumberParser.parseAndValidateNumbers(inputView.inputWinningNumbers());
-        LottoWinning lottoWinning = new LottoWinning(new Lotto(winningNumbers));
+        int bonusNumber = NumberParser.parseAndValidateInt(inputView.inputBonusNumber());
+        LottoWinning lottoWinning = new LottoWinning(new Lotto(winningNumbers), bonusNumber);
     }
 
 }
