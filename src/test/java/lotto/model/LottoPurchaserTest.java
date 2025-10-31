@@ -13,10 +13,10 @@ public class LottoPurchaserTest {
     public void 정상적인_입력값일_경우_구매_금액으로_LottoPurchaser_객체를_생성한다() {
         // given
         int purchaseAmount = 14000;
-        LottoPurchaser expected = new LottoPurchaser(14000);
+        LottoPurchaser expected = new LottoPurchaser(14000, new AutoLottoFactory());
 
         // when
-        LottoPurchaser actual = new LottoPurchaser(purchaseAmount);
+        LottoPurchaser actual = new LottoPurchaser(purchaseAmount, new AutoLottoFactory());
 
         // then
         assertThat(actual.getPurchaseAmount())
@@ -26,14 +26,14 @@ public class LottoPurchaserTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1})
     public void 입력값이_0이하의_숫자일_경우_예외가_발생한다(int purchaseAmount) {
-        assertThatThrownBy(() -> new LottoPurchaser(purchaseAmount))
+        assertThatThrownBy(() -> new LottoPurchaser(purchaseAmount, new AutoLottoFactory()))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {14001, 12345})
     public void 입력값이_1000원으로_나누어_떨어지지_않으면_예외가_발생한다(int purchaseAmount) {
-        assertThatThrownBy(() -> new LottoPurchaser(purchaseAmount))
+        assertThatThrownBy(() -> new LottoPurchaser(purchaseAmount, new AutoLottoFactory()))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
