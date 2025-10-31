@@ -5,7 +5,7 @@ public class LottoPurchaser {
 
     public LottoPurchaser(int purchaseAmount) {
         InputValidator.validatePositiveAmount(purchaseAmount);
-        InputValidator.validateDivisibleByThousand(purchaseAmount);
+        LottoNumberValidator.validateDivisibleByThousand(purchaseAmount);
         this.purchaseAmount = purchaseAmount;
     }
 
