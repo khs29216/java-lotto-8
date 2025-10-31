@@ -17,6 +17,10 @@ public class LottoWinning {
         }
     }
 
+    public Lotto getWinningNumbers() {
+        return new Lotto(winningNumbers.getNumbers());
+    }
+
     public int getBonusNumber() {
         return bonusNumber;
     }

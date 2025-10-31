@@ -1,11 +1,13 @@
 package lotto.model;
 
+import lotto.model.lottoTicket.LottoTicket;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoPurchaser {
     private final int purchaseAmount;
-    private final List<Lotto> lottos = new ArrayList<>();
+    private List<LottoTicket> lottoTickets = new ArrayList<>();
     private LottoFactory lottoFactory;
 
     public LottoPurchaser(int purchaseAmount, LottoFactory lottoFactory) {
@@ -15,8 +17,15 @@ public class LottoPurchaser {
         this.lottoFactory = lottoFactory;
     }
 
-    public void purchaseLotto() {
-        lottos.addAll(lottoFactory.createMultiple(purchaseAmount / 1000));
+    public void purchaseLottoTickets() {
+        List<Lotto> lottos = lottoFactory.createMultiple(purchaseAmount / 1000);
+        for (Lotto lotto : lottos) {
+            lottoTickets.add(LottoTicketGenerator.generateLottoTicket(lotto));
+        }
+    }
+
+    public List<LottoTicket> getLottoTickets() {
+        return List.copyOf(lottoTickets);
     }
 
     public int getPurchaseAmount() {
