@@ -7,6 +7,9 @@ public class LottoNumberValidator {
     private static final String ERROR_LOTTO_NUMBER_RANGE = "[ERROR] 로또 번호는 " + MIN + "부터 " + MAX + "사이의 숫자여야 합니다.";
     private static final String ERROR_DIVISIBLE_BY_THOUSAND = "[ERROR] 구매 금액은 " + LOTTO_PRICE + "원으로 나누어 떨어져야합니다.";
 
+    private LottoNumberValidator() {
+    }
+
     public static void validateLottoNumberRange(int number) {
         if (number < MIN || number > MAX) {
             throw new IllegalArgumentException(ERROR_LOTTO_NUMBER_RANGE);
