@@ -18,7 +18,7 @@ public class LottoPurchaser {
     public void purchaseLottoTickets() {
         List<Lotto> lottos = lottoFactory.createMultiple(purchaseAmount / 1000);
         for (Lotto lotto : lottos) {
-            lottoTickets.add(LottoTicketGenerator.generateLottoTicket(lotto));
+            lottoTickets.add(new LottoTicket(lotto));
         }
     }
 
