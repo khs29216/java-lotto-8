@@ -9,8 +9,8 @@ import lotto.view.OutputView;
 import java.util.List;
 
 public class Controller {
-    private InputView inputView;
-    private OutputView outputView;
+    private final InputView inputView;
+    private final OutputView outputView;
 
     public Controller(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -18,22 +18,39 @@ public class Controller {
     }
 
     public void run() {
-        int purchaseAmount = NumberParser.parseAndValidateInt(inputView.inputPurchaseAmount());
-        LottoPurchaser lottoPurchaser = new LottoPurchaser(purchaseAmount, new AutoLottoFactory());
-        lottoPurchaser.purchaseLottoTickets();
+        LottoPurchaser lottoPurchaser = createLottoPurchaser();
         outputView.printLottoTickets(lottoPurchaser.getLottoTickets(), lottoPurchaser.getPurchaseAmount());
 
-        List<Integer> winningNumbers = NumberParser.parseAndValidateNumbers(inputView.inputWinningNumbers());
-        int bonusNumber = NumberParser.parseAndValidateInt(inputView.inputBonusNumber());
-        LottoWinning lottoWinning = new LottoWinning(new Lotto(winningNumbers), bonusNumber);
+        List<Integer> winningNumbers = inputWinningNumbers();
+        int bonusNumber = inputBonusNumber();
 
-        LottoTicketChecker lottoChecker = new LottoTicketChecker(lottoWinning);
-        for (LottoTicket lottoTicket : lottoPurchaser.getLottoTickets()) {
-            lottoChecker.checkLottoTicket(lottoTicket);
-        }
+        LottoWinning lottoWinning = new LottoWinning(new Lotto(winningNumbers), bonusNumber);
+        checkLottoTickets(lottoWinning, lottoPurchaser);
 
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoPurchaser);
         lottoWinningStatistics.updateWinningCount();
         outputView.printWinningStatistics(lottoPurchaser, lottoWinningStatistics);
+    }
+
+    private LottoPurchaser createLottoPurchaser() {
+        int purchaseAmount = NumberParser.parseAndValidateInt(inputView.inputPurchaseAmount());
+        LottoPurchaser lottoPurchaser = new LottoPurchaser(purchaseAmount, new AutoLottoFactory());
+        lottoPurchaser.purchaseLottoTickets();
+        return lottoPurchaser;
+    }
+
+    private List<Integer> inputWinningNumbers() {
+        return NumberParser.parseAndValidateNumbers(inputView.inputWinningNumbers());
+    }
+
+    private int inputBonusNumber() {
+        return NumberParser.parseAndValidateInt(inputView.inputBonusNumber());
+    }
+
+    private void checkLottoTickets(LottoWinning lottoWinning, LottoPurchaser lottoPurchaser) {
+        LottoTicketChecker lottoChecker = new LottoTicketChecker(lottoWinning);
+        for (LottoTicket lottoTicket : lottoPurchaser.getLottoTickets()) {
+            lottoChecker.checkLottoTicket(lottoTicket);
+        }
     }
 }
