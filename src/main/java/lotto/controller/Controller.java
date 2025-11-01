@@ -18,12 +18,12 @@ public class Controller {
 
     public void run() {
         LottoPurchaser lottoPurchaser = createLottoPurchaser();
+        lottoPurchaser.purchaseLottoTickets();
         outputView.printLottoTickets(lottoPurchaser.getLottoTickets(), lottoPurchaser.getPurchaseAmount());
 
-        List<Integer> winningNumbers = inputWinningNumbers();
-        int bonusNumber = inputBonusNumber();
+        Lotto winningNumbers = createWinningNumbers();
+        LottoWinning lottoWinning = createLottoWinningWithBonus(winningNumbers);
 
-        LottoWinning lottoWinning = new LottoWinning(new Lotto(winningNumbers), bonusNumber);
         checkLottoTickets(lottoWinning, lottoPurchaser);
 
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoPurchaser);
@@ -32,10 +32,43 @@ public class Controller {
     }
 
     private LottoPurchaser createLottoPurchaser() {
-        int purchaseAmount = NumberParser.parseAndValidateInt(inputView.inputPurchaseAmount());
-        LottoPurchaser lottoPurchaser = new LottoPurchaser(purchaseAmount, new AutoLottoFactory());
-        lottoPurchaser.purchaseLottoTickets();
-        return lottoPurchaser;
+        while (true) {
+            try {
+                int purchaseAmount = inputPurchaseAmount();
+                LottoPurchaser lottoPurchaser = new LottoPurchaser(purchaseAmount, new AutoLottoFactory());
+                return lottoPurchaser;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private Lotto createWinningNumbers() {
+        while (true) {
+            try {
+                List<Integer> winningNumbers = inputWinningNumbers();
+                Lotto lotto = new Lotto(winningNumbers);
+                return lotto;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private LottoWinning createLottoWinningWithBonus(Lotto winningNumbers) {
+        while (true) {
+            try {
+                int bonusNumber = inputBonusNumber();
+                LottoWinning lottoWinning = new LottoWinning(winningNumbers, bonusNumber);
+                return lottoWinning;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
+    }
+
+    private int inputPurchaseAmount() {
+        return NumberParser.parseAndValidateInt(inputView.inputPurchaseAmount());
     }
 
     private List<Integer> inputWinningNumbers() {
