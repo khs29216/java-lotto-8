@@ -22,9 +22,9 @@ public class LottoPurchaser {
         }
     }
 
-    public void checkLottoTickets(LottoWinning lottoWinning) {
+    public void checkLottoTickets(LottoWinningNumber lottoWinningNumber) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            lottoTicket.checkLottoTicket(lottoWinning);
+            lottoTicket.checkLottoTicket(lottoWinningNumber);
         }
     }
 

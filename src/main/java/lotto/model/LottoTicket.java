@@ -10,8 +10,8 @@ public class LottoTicket {
         this.lotto = lotto;
     }
 
-    public void checkLottoTicket(LottoWinning lottoWinning) {
-        rank = matchLotto(lottoWinning);
+    public void checkLottoTicket(LottoWinningNumber winningNumber) {
+        rank = matchLotto(winningNumber);
     }
 
     public Lotto getLotto() {
@@ -23,13 +23,13 @@ public class LottoTicket {
         return rank;
     }
 
-    private Rank matchLotto(LottoWinning lottoWinning) {
+    private Rank matchLotto(LottoWinningNumber lottoWinningNumber) {
         List<Integer> matchingNumbers = lotto.getNumbers().stream()
-                .filter(number -> lottoWinning.getWinningNumbers().getNumbers().contains(number))
+                .filter(number -> lottoWinningNumber.getMainNumbers().getNumbers().contains(number))
                 .toList();
 
         int matchingCount = matchingNumbers.size();
-        boolean bonusMatched = lotto.getNumbers().contains(lottoWinning.getBonusNumber());
+        boolean bonusMatched = lotto.getNumbers().contains(lottoWinningNumber.getBonusNumber());
 
         return Rank.of(matchingCount, bonusMatched);
     }

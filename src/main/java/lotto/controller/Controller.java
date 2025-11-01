@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.model.*;
-import lotto.model.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -21,10 +20,10 @@ public class Controller {
         lottoPurchaser.purchaseLottoTickets();
         outputView.printLottoTickets(lottoPurchaser.getLottoTickets(), lottoPurchaser.getPurchaseAmount());
 
-        Lotto winningNumbers = createWinningNumbers();
-        LottoWinning lottoWinning = createLottoWinningWithBonus(winningNumbers);
+        Lotto winningMainNumbers = createWinningMainNumbers();
+        LottoWinningNumber lottoWinningNumber = createLottoWinningNumberWithBonus(winningMainNumbers);
 
-        lottoPurchaser.checkLottoTickets(lottoWinning);
+        lottoPurchaser.checkLottoTickets(lottoWinningNumber);
 
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoPurchaser);
         lottoWinningStatistics.updateWinningCount();
@@ -43,11 +42,11 @@ public class Controller {
         }
     }
 
-    private Lotto createWinningNumbers() {
+    private Lotto createWinningMainNumbers() {
         while (true) {
             try {
-                List<Integer> winningNumbers = inputWinningNumbers();
-                Lotto lotto = new Lotto(winningNumbers);
+                List<Integer> winningMainNumbers = inputWinningMainNumbers();
+                Lotto lotto = new Lotto(winningMainNumbers);
                 return lotto;
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
@@ -55,12 +54,12 @@ public class Controller {
         }
     }
 
-    private LottoWinning createLottoWinningWithBonus(Lotto winningNumbers) {
+    private LottoWinningNumber createLottoWinningNumberWithBonus(Lotto winningMainNumbers) {
         while (true) {
             try {
                 int bonusNumber = inputBonusNumber();
-                LottoWinning lottoWinning = new LottoWinning(winningNumbers, bonusNumber);
-                return lottoWinning;
+                LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(winningMainNumbers, bonusNumber);
+                return lottoWinningNumber;
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e.getMessage());
             }
@@ -71,7 +70,7 @@ public class Controller {
         return NumberParser.parseAndValidateInt(inputView.inputPurchaseAmount());
     }
 
-    private List<Integer> inputWinningNumbers() {
+    private List<Integer> inputWinningMainNumbers() {
         return NumberParser.parseAndValidateNumbers(inputView.inputWinningNumbers());
     }
 

@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoWinningTest {
     @Test
-    public void 정상적인_입력값일_경우_보너스_번호로_LottoWinning_객체를_생성한다() {
+    public void 정상적인_입력값일_경우_보너스_번호로_LottoWinningNumber_객체를_생성한다() {
         // given
-        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningMainNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 7;
-        LottoWinning expected = new LottoWinning(winningNumbers, 7);
+        LottoWinningNumber expected = new LottoWinningNumber(winningMainNumbers, 7);
 
         // when
-        LottoWinning actual = new LottoWinning(winningNumbers, bonusNumber);
+        LottoWinningNumber actual = new LottoWinningNumber(winningMainNumbers, bonusNumber);
 
         // then
         assertThat(actual.getBonusNumber()).isEqualTo(expected.getBonusNumber());
@@ -27,16 +27,16 @@ public class LottoWinningTest {
     @ParameterizedTest
     @ValueSource(ints = {-2, 0, 46, 100})
     public void 보너스_번호가_로또_번호의_범위를_벗어난_경우_예외가_발생한다(int bonusNumber) {
-        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        assertThatThrownBy(() -> new LottoWinning(winningNumbers, bonusNumber))
+        Lotto winningMainNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThatThrownBy(() -> new LottoWinningNumber(winningMainNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2})
     public void 보너스_번호가_당첨_번호와_중복될_경우_예외가_발생한다(int bonusNumber) {
-        Lotto winningNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-        assertThatThrownBy(() -> new LottoWinning(winningNumbers, bonusNumber))
+        Lotto winningMainNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        assertThatThrownBy(() -> new LottoWinningNumber(winningMainNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
