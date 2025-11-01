@@ -15,6 +15,10 @@ public class LottoTicket {
         return new Lotto(lotto.getNumbers());
     }
 
+    public Rank getRank() {
+        return rank;
+    }
+
     void updateRank(Rank rank) {
         this.rank = rank;
     }

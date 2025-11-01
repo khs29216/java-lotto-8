@@ -24,9 +24,10 @@ public class Controller {
         LottoWinning lottoWinning = new LottoWinning(new Lotto(winningNumbers), bonusNumber);
 
         LottoTicketChecker lottoChecker = new LottoTicketChecker(lottoWinning);
-
         for (LottoTicket lottoTicket : lottoPurchaser.getLottoTickets()) {
             lottoChecker.checkLottoTicket(lottoTicket);
         }
+
+        double profitRate = LottoProfitCalculator.calculateProfitRate(lottoPurchaser);
     }
 }
