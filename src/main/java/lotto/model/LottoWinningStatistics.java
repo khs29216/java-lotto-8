@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.model.lottoTicket.LottoTicket;
-
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;

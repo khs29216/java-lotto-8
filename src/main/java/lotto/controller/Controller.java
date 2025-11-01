@@ -1,8 +1,7 @@
 package lotto.controller;
 
 import lotto.model.*;
-import lotto.model.lottoTicket.LottoTicket;
-import lotto.model.lottoTicket.LottoTicketChecker;
+import lotto.model.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -48,9 +47,8 @@ public class Controller {
     }
 
     private void checkLottoTickets(LottoWinning lottoWinning, LottoPurchaser lottoPurchaser) {
-        LottoTicketChecker lottoChecker = new LottoTicketChecker(lottoWinning);
         for (LottoTicket lottoTicket : lottoPurchaser.getLottoTickets()) {
-            lottoChecker.checkLottoTicket(lottoTicket);
+            lottoTicket.checkLottoTicket(lottoWinning);
         }
     }
 }

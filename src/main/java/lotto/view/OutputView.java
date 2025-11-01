@@ -1,10 +1,6 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.LottoPurchaser;
-import lotto.model.LottoWinningStatistics;
-import lotto.model.lottoTicket.LottoTicket;
-import lotto.model.Rank;
+import lotto.model.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
