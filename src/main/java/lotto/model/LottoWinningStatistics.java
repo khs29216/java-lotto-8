@@ -11,7 +11,6 @@ public class LottoWinningStatistics {
 
     public void updateWinningCount(List<LottoTicket> lottoTickets) {
         for (LottoTicket lottoTicket : lottoTickets) {
-            validLottoRank(lottoTicket);
             Rank rank = lottoTicket.getRank();
             winningCount.put(rank, winningCount.getOrDefault(rank, 0) + 1);
         }
@@ -28,12 +27,6 @@ public class LottoWinningStatistics {
             totalPrize += rank.getPrize() * winningCount.put(rank, winningCount.getOrDefault(rank, 0));
         }
         return totalPrize;
-    }
-
-    private static void validLottoRank(LottoTicket lottoTicket) {
-        if (lottoTicket.getRank() == null) {
-            throw new IllegalArgumentException("[ERROR] 등수 체크를 하지 않은 로또가 있습니다.");
-        }
     }
 
 }

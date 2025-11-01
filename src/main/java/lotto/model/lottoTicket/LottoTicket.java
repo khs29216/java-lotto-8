@@ -16,10 +16,17 @@ public class LottoTicket {
     }
 
     public Rank getRank() {
+        validLottoRank();
         return rank;
     }
 
     void updateRank(Rank rank) {
         this.rank = rank;
+    }
+
+    private void validLottoRank() {
+        if (rank == null) {
+            throw new IllegalArgumentException("[ERROR] 현재 로또의 등수 체크를 하지 않았습니다");
+        }
     }
 }
