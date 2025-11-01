@@ -9,7 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class LottoWinningTest {
+public class LottoWinningNumberTest {
     @Test
     public void 정상적인_입력값일_경우_보너스_번호로_LottoWinningNumber_객체를_생성한다() {
         // given
