@@ -32,7 +32,8 @@ public class Controller {
             lottoChecker.checkLottoTicket(lottoTicket);
         }
 
-        LottoWinningStatistics lottoWinningStatisitcs = new LottoWinningStatistics();
-        lottoWinningStatisitcs.updateWinningCount(lottoPurchaser.getLottoTickets());
+        LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoPurchaser);
+        lottoWinningStatistics.updateWinningCount();
+        outputView.printWinningStatistics(lottoPurchaser, lottoWinningStatistics);
     }
 }
