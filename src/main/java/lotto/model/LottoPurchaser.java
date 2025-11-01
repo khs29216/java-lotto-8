@@ -22,6 +22,12 @@ public class LottoPurchaser {
         }
     }
 
+    public void checkLottoTickets(LottoWinning lottoWinning) {
+        for (LottoTicket lottoTicket : lottoTickets) {
+            lottoTicket.checkLottoTicket(lottoWinning);
+        }
+    }
+
     public List<LottoTicket> getLottoTickets() {
         return List.copyOf(lottoTickets);
     }

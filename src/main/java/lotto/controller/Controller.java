@@ -24,7 +24,7 @@ public class Controller {
         Lotto winningNumbers = createWinningNumbers();
         LottoWinning lottoWinning = createLottoWinningWithBonus(winningNumbers);
 
-        checkLottoTickets(lottoWinning, lottoPurchaser);
+        lottoPurchaser.checkLottoTickets(lottoWinning);
 
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoPurchaser);
         lottoWinningStatistics.updateWinningCount();
@@ -77,11 +77,5 @@ public class Controller {
 
     private int inputBonusNumber() {
         return NumberParser.parseAndValidateInt(inputView.inputBonusNumber());
-    }
-
-    private void checkLottoTickets(LottoWinning lottoWinning, LottoPurchaser lottoPurchaser) {
-        for (LottoTicket lottoTicket : lottoPurchaser.getLottoTickets()) {
-            lottoTicket.checkLottoTicket(lottoWinning);
-        }
     }
 }
