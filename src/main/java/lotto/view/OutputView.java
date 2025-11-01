@@ -34,6 +34,10 @@ public class OutputView {
         System.out.printf("총 수익률은 %.1f%%입니다.\n", lottoWinningStatistics.calculateProfitRate());
     }
 
+    public void printErrorMessage(String errorMessage) {
+        System.out.println(errorMessage);
+    }
+
     private void printLotto(Lotto lotto) {
         List<Integer> numbers = lotto.getNumbers().stream()
                 .sorted()
