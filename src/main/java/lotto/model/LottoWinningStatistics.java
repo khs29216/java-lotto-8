@@ -22,14 +22,14 @@ public class LottoWinningStatistics {
     }
 
     public double calculateProfitRate() {
-        int totalPrize = calculateTotalPrize();
+        long totalPrize = calculateTotalPrize();
         return (double) totalPrize / lottoPurchaser.getPurchaseAmount() * 100;
     }
 
-    private int calculateTotalPrize() {
-        int totalPrize = 0;
+    private long calculateTotalPrize() {
+        long totalPrize = 0;
         for (Rank rank : winningCount.keySet()) {
-            totalPrize += rank.getPrize() * winningCount.put(rank, winningCount.getOrDefault(rank, 0));
+            totalPrize += (long) rank.getPrize() * winningCount.put(rank, winningCount.getOrDefault(rank, 0));
         }
         return totalPrize;
     }
