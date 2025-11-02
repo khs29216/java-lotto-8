@@ -6,7 +6,7 @@ import lotto.model.Lotto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AutoLottoFactory implements LottoFactory{
+public class AutoLottoFactory implements LottoFactory {
     @Override
     public Lotto create() {
         List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);

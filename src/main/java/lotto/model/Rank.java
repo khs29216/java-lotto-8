@@ -1,9 +1,9 @@
 package lotto.model;
 
 public enum Rank {
-    FIRST_PLACE(1, 6, false,2_000_000_000),
+    FIRST_PLACE(1, 6, false, 2_000_000_000),
     SECOND_PLACE(2, 5, true, 30_000_000),
-    THIRD_PLACE(3, 5, false,1_500_000),
+    THIRD_PLACE(3, 5, false, 1_500_000),
     FOURTH_PLACE(4, 4, false, 50_000),
     FIFTH_PLACE(5, 3, false, 5_000),
     MISS(0, 0, false, 0);
