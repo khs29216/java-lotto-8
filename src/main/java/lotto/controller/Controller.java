@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import lotto.model.*;
+import lotto.model.factory.AutoLottoFactory;
+import lotto.util.NumberParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

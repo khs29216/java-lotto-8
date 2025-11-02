@@ -1,5 +1,8 @@
 package lotto.model;
 
+import lotto.constant.ErrorMessage;
+import lotto.util.LottoNumberValidator;
+
 public class LottoWinningNumber {
     private final Lotto mainNumbers;
     private final int bonusNumber;

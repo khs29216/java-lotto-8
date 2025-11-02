@@ -1,4 +1,6 @@
-package lotto.model;
+package lotto.constant;
+
+import lotto.model.Lotto;
 
 public class ErrorMessage {
     public static final String PREFIX = "[ERROR] ";

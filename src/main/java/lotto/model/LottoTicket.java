@@ -1,5 +1,7 @@
 package lotto.model;
 
+import lotto.constant.ErrorMessage;
+
 import java.util.List;
 
 public class LottoTicket {

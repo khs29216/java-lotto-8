@@ -1,4 +1,6 @@
-package lotto.model;
+package lotto.util;
+
+import lotto.constant.ErrorMessage;
 
 public class InputValidator {
     private static final String REGEX_NUMERIC_ONLY = "\\d+";

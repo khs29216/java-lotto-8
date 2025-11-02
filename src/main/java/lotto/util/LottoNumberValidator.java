@@ -1,4 +1,7 @@
-package lotto.model;
+package lotto.util;
+
+import lotto.constant.ErrorMessage;
+import lotto.model.Lotto;
 
 public class LottoNumberValidator {
 

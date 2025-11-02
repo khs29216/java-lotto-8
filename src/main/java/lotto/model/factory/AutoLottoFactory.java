@@ -1,7 +1,7 @@
-package lotto.model;
+package lotto.model.factory;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import org.assertj.core.util.Streams;
+import lotto.model.Lotto;
 
 import java.util.ArrayList;
 import java.util.List;

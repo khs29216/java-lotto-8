@@ -1,10 +1,13 @@
-package lotto.model;
+package lotto.util;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class NumberParser {
     private static final String DELIMITER = ",";
+
+    private NumberParser() {
+    }
 
     public static int parseAndValidateInt(String input) {
         InputValidator.validateNullOrEmpty(input);

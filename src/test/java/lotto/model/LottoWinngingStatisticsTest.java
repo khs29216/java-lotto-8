@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.model.factory.LottoFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.EnumMap;
