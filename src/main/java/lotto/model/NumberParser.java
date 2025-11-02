@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class NumberParser {
+    private static final String DELIMITER = ",";
 
     public static int parseAndValidateInt(String input) {
         InputValidator.validateNullOrEmpty(input);
@@ -14,7 +15,7 @@ public class NumberParser {
     }
 
     public static List<Integer> parseAndValidateNumbers(String numbers) {
-        return Arrays.stream(numbers.split(",", -1))
+        return Arrays.stream(numbers.split(DELIMITER, -1))
                 .map(NumberParser::parseAndValidateInt)
                 .toList();
     }
