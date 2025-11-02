@@ -27,7 +27,7 @@ public class Controller {
 
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoPurchaser);
         lottoWinningStatistics.updateWinningCount();
-        outputView.printWinningStatistics(lottoPurchaser, lottoWinningStatistics);
+        outputView.printWinningStatistics(lottoWinningStatistics);
     }
 
     private LottoPurchaser createLottoPurchaser() {

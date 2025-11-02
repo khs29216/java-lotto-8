@@ -7,31 +7,29 @@ import java.util.Comparator;
 import java.util.List;
 
 public class OutputView {
+    private static final String FORMAT_PURCHASE_COUNT = "%d개를 구매했습니다.\n";
+    private static final String WINNING_STATISTICS_HEADER = "당첨 통계\n---";
+    private static final String FORMAT_PROFIT_RATE = "총 수익률은 %.1f%%입니다.\n";
+    private static final String FORMAT_WINNING_DETAIL = "%s (%,d원) - %d개\n";
+    private static final String FORMAT_MATCH_COUNT = "%d개 일치";
+    private static final String BONUS_BALL_SUFFIX = ", 보너스 볼 일치";
 
     public void printLottoTickets(List<LottoTicket> lottoTickets, int purchaseAmount) {
-        System.out.println(purchaseAmount / Lotto.UNIT_PRICE + "개를 구매했습니다.");
+        System.out.printf(FORMAT_PURCHASE_COUNT, purchaseAmount / Lotto.UNIT_PRICE);
         for (LottoTicket lottoTicket : lottoTickets) {
             printLotto(lottoTicket.getLotto());
         }
     }
 
-    public void printWinningStatistics(LottoPurchaser lottoPurchaser, LottoWinningStatistics lottoWinningStatistics) {
-        System.out.println("당첨 통계\n---");
+    public void printWinningStatistics(LottoWinningStatistics lottoWinningStatistics) {
+        System.out.println(WINNING_STATISTICS_HEADER);
         List<Rank> ranks = Arrays.stream(Rank.values())
                 .sorted(Comparator.comparingInt(Rank::getRank).reversed())
-                .filter(rank -> rank.getRank() != 0)
+                .filter(rank -> rank != Rank.MISS)
                 .toList();
 
-        for (Rank rank : ranks) {
-            String matchCount = rank.getMatchCount() + "개 일치";
-            if (rank == Rank.SECOND_PLACE) {
-                matchCount += ", 보너스 볼 일치";
-            }
-            String prize = String.format("%,d원", rank.getPrize());
-            int count = lottoWinningStatistics.getWinningCount().getOrDefault(rank, 0);
-            System.out.printf("%s (%s) - %d개\n", matchCount, prize, count);
-        }
-        System.out.printf("총 수익률은 %.1f%%입니다.\n", lottoWinningStatistics.calculateProfitRate());
+        printWinningDetail(lottoWinningStatistics, ranks);
+        System.out.printf(FORMAT_PROFIT_RATE, lottoWinningStatistics.calculateProfitRate());
     }
 
     public void printErrorMessage(String errorMessage) {
@@ -43,5 +41,17 @@ public class OutputView {
                 .sorted()
                 .toList();
         System.out.println(numbers);
+    }
+
+    private void printWinningDetail(LottoWinningStatistics lottoWinningStatistics, List<Rank> ranks) {
+        for (Rank rank : ranks) {
+            String matchCount = String.format(FORMAT_MATCH_COUNT, rank.getMatchCount());
+            if (rank == Rank.SECOND_PLACE) {
+                matchCount += BONUS_BALL_SUFFIX;
+            }
+
+            int count = lottoWinningStatistics.getWinningCount().getOrDefault(rank, 0);
+            System.out.printf(FORMAT_WINNING_DETAIL, matchCount, rank.getPrize(), count);
+        }
     }
 }
