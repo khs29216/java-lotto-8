@@ -4,6 +4,7 @@ import lotto.constant.ErrorMessage;
 
 public class InputValidator {
     private static final String REGEX_NUMERIC_ONLY = "\\d+";
+    private static final String WHITE_SPACE = " ";
 
     private InputValidator() {
     }
@@ -15,7 +16,7 @@ public class InputValidator {
     }
 
     public static void validateWithWhiteSpace(String input) {
-        if (input.contains(" ")) {
+        if (input.contains(WHITE_SPACE)) {
             throw new IllegalArgumentException(ErrorMessage.WITH_WHITE_SPACE);
         }
     }
