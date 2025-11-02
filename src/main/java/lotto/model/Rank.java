@@ -8,33 +8,35 @@ public enum Rank {
     FIFTH_PLACE(5, 3, false, 5_000),
     MISS(0, 0, false, 0);
 
+    private static final int BONUS_CHECK_MATCH_COUNT = 5;
+
     private final int rank;
     private final int matchCount;
     private final boolean bonusMatched;
     private final int prize;
 
-    Rank(int rank, int matchingCount, boolean bonusMatched, int prize) {
+    Rank(int rank, int matchCount, boolean bonusMatched, int prize) {
         this.rank = rank;
-        this.matchCount = matchingCount;
+        this.matchCount = matchCount;
         this.bonusMatched = bonusMatched;
         this.prize = prize;
     }
 
-    public static Rank of(int matchingCount, boolean bonusMatched) {
+    public static Rank of(int matchCount, boolean bonusMatched) {
         for (Rank rank : values()) {
-            if (rank.matchRank(matchingCount, bonusMatched)) {
+            if (rank.matchRank(matchCount, bonusMatched)) {
                 return rank;
             }
         }
         return MISS;
     }
 
-    private boolean matchRank(int matchingCount, boolean bonusMatched) {
-        return this.matchCount == matchingCount && checkBonusMatched(matchingCount, bonusMatched);
+    private boolean matchRank(int matchCount, boolean bonusMatched) {
+        return this.matchCount == matchCount && checkBonusMatched(matchCount, bonusMatched);
     }
 
-    private boolean checkBonusMatched(int matchingCount, boolean bonusMatched) {
-        return matchingCount != 5 || this.bonusMatched == bonusMatched;
+    private boolean checkBonusMatched(int matchCount, boolean bonusMatched) {
+        return matchCount != BONUS_CHECK_MATCH_COUNT || this.bonusMatched == bonusMatched;
     }
 
     public int getRank() {
