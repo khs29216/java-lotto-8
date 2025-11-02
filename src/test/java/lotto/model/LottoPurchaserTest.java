@@ -36,4 +36,19 @@ public class LottoPurchaserTest {
         assertThatThrownBy(() -> new LottoPurchaser(purchaseAmount, new AutoLottoFactory()))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    public void 로또_구입_금액_만큼_로또를_발행한다() {
+        // given
+        int purchaseAmount = 14000;
+        LottoPurchaser lottoPurchaser = new LottoPurchaser(purchaseAmount, new AutoLottoFactory());
+        int expectedLottoCount = purchaseAmount / 1_000;
+
+        // when
+        lottoPurchaser.purchaseLottoTickets();
+
+        // then
+        int actualLottoCount = lottoPurchaser.getLottoTickets().size();
+        assertThat(actualLottoCount).isEqualTo(expectedLottoCount);
+    }
 }
