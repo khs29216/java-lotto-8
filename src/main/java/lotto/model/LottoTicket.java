@@ -36,7 +36,7 @@ public class LottoTicket {
 
     private void validLottoRank() {
         if (rank == null) {
-            throw new IllegalArgumentException("[ERROR] 현재 로또의 등수 체크를 하지 않았습니다");
+            throw new IllegalArgumentException(ErrorMessage.LOTTO_RANK_UNCHECKED);
         }
     }
 }
