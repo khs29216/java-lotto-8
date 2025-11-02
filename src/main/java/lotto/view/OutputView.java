@@ -9,7 +9,7 @@ import java.util.List;
 public class OutputView {
 
     public void printLottoTickets(List<LottoTicket> lottoTickets, int purchaseAmount) {
-        System.out.println(purchaseAmount / 1000 + "개를 구매했습니다");
+        System.out.println(purchaseAmount / 1000 + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : lottoTickets) {
             printLotto(lottoTicket.getLotto());
         }
@@ -25,7 +25,7 @@ public class OutputView {
         for (Rank rank : ranks) {
             String matchCount = rank.getMatchCount() + "개 일치";
             if (rank == Rank.SECOND_PLACE) {
-                matchCount += ", 보너스";
+                matchCount += ", 보너스 볼 일치";
             }
             String prize = String.format("%,d원", rank.getPrize());
             int count = lottoWinningStatistics.getWinningCount().getOrDefault(rank, 0);
