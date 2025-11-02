@@ -42,7 +42,7 @@ public class LottoPurchaserTest {
         // given
         int purchaseAmount = 14000;
         LottoPurchaser lottoPurchaser = new LottoPurchaser(purchaseAmount, new AutoLottoFactory());
-        int expectedLottoCount = purchaseAmount / 1_000;
+        int expectedLottoCount = purchaseAmount / Lotto.UNIT_PRICE;
 
         // when
         lottoPurchaser.purchaseLottoTickets();

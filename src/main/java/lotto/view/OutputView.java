@@ -9,7 +9,7 @@ import java.util.List;
 public class OutputView {
 
     public void printLottoTickets(List<LottoTicket> lottoTickets, int purchaseAmount) {
-        System.out.println(purchaseAmount / 1000 + "개를 구매했습니다.");
+        System.out.println(purchaseAmount / Lotto.UNIT_PRICE + "개를 구매했습니다.");
         for (LottoTicket lottoTicket : lottoTickets) {
             printLotto(lottoTicket.getLotto());
         }
