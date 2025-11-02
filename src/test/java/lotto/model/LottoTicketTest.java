@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.constant.ErrorMessage;
 import lotto.util.NumberParser;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -39,7 +40,8 @@ public class LottoTicketTest {
     @Test
     public void 등수를_확인하지_않은_로또에_getRank를_호출하면_예외가_발생한다() {
         LottoTicket lottoTicket = new LottoTicket(new Lotto(List.of(1,2,3,4,5,6)));
-        assertThatThrownBy(() -> lottoTicket.getRank())
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(lottoTicket::getRank)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.LOTTO_RANK_UNCHECKED);
     }
 }

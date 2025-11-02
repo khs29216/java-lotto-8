@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -29,7 +30,8 @@ public class LottoWinningNumberTest {
     public void 보너스_번호가_로또_번호의_범위를_벗어난_경우_예외가_발생한다(int bonusNumber) {
         Lotto winningMainNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         assertThatThrownBy(() -> new LottoWinningNumber(winningMainNumbers, bonusNumber))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.LOTTO_NUMBER_RANGE);
     }
 
     @ParameterizedTest
@@ -37,6 +39,7 @@ public class LottoWinningNumberTest {
     public void 보너스_번호가_당첨_번호와_중복될_경우_예외가_발생한다(int bonusNumber) {
         Lotto winningMainNumbers = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         assertThatThrownBy(() -> new LottoWinningNumber(winningMainNumbers, bonusNumber))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.BONUS_NUMBER_NOT_IN_WINNING_MAIN_NUMBERS);
     }
 }

@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.constant.ErrorMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -44,7 +45,8 @@ public class NumberParserTest {
     @MethodSource("provideInvalidInput")
     public void 숫자가_아닌_다른_값이_입력값에_포함되어_있으면_예외가_발생한다(String input) {
         assertThatThrownBy(() -> NumberParser.parseAndValidateInt(input))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NUMERIC_ONLY);
     }
 
     @Test

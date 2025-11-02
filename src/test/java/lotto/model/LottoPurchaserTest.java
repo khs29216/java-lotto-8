@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.constant.ErrorMessage;
 import lotto.model.factory.AutoLottoFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,14 +28,16 @@ public class LottoPurchaserTest {
     @ValueSource(ints = {0, -1})
     public void 입력값이_0이하의_숫자일_경우_예외가_발생한다(int purchaseAmount) {
         assertThatThrownBy(() -> new LottoPurchaser(purchaseAmount, new AutoLottoFactory()))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.POSITIVE_AMOUNT);
     }
 
     @ParameterizedTest
     @ValueSource(ints = {14001, 12345})
     public void 입력값이_1000원으로_나누어_떨어지지_않으면_예외가_발생한다(int purchaseAmount) {
         assertThatThrownBy(() -> new LottoPurchaser(purchaseAmount, new AutoLottoFactory()))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.DIVISIBLE_BY_THOUSAND);
     }
 
     @Test
