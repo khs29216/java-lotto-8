@@ -1,10 +1,12 @@
 package lotto.model;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTicketTest {
 
@@ -31,5 +33,12 @@ public class LottoTicketTest {
 
         // then
         assertThat(lottoTicket.getRank()).isEqualTo(expectedRank);
+    }
+
+    @Test
+    public void 등수를_확인하지_않은_로또에_getRank를_호출하면_예외가_발생한다() {
+        LottoTicket lottoTicket = new LottoTicket(new Lotto(List.of(1,2,3,4,5,6)));
+        assertThatThrownBy(() -> lottoTicket.getRank())
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
