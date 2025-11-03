@@ -1,6 +1,11 @@
 package lotto.controller;
 
-import lotto.model.*;
+import lotto.dto.LottoPurchaserDto;
+import lotto.dto.LottoWinningStatisticsDto;
+import lotto.model.Lotto;
+import lotto.model.LottoPurchaser;
+import lotto.model.LottoWinningNumber;
+import lotto.model.LottoWinningStatistics;
 import lotto.model.factory.AutoLottoFactory;
 import lotto.util.NumberParser;
 import lotto.view.InputView;
@@ -20,7 +25,8 @@ public class Controller {
     public void run() {
         LottoPurchaser lottoPurchaser = createLottoPurchaser();
         lottoPurchaser.purchaseLottoTickets();
-        outputView.printLottoTickets(lottoPurchaser.getLottoTickets(), lottoPurchaser.getPurchaseAmount());
+        LottoPurchaserDto lottoPurchaserDto = LottoPurchaserDto.from(lottoPurchaser);
+        outputView.printLottoTickets(lottoPurchaserDto);
 
         Lotto winningMainNumbers = createWinningMainNumbers();
         LottoWinningNumber lottoWinningNumber = createLottoWinningNumberWithBonus(winningMainNumbers);
@@ -29,7 +35,8 @@ public class Controller {
 
         LottoWinningStatistics lottoWinningStatistics = new LottoWinningStatistics(lottoPurchaser);
         lottoWinningStatistics.updateWinningCount();
-        outputView.printWinningStatistics(lottoWinningStatistics);
+        LottoWinningStatisticsDto lottoWinningStatisticsDto = LottoWinningStatisticsDto.from(lottoWinningStatistics);
+        outputView.printWinningStatistics(lottoWinningStatisticsDto);
     }
 
     private LottoPurchaser createLottoPurchaser() {

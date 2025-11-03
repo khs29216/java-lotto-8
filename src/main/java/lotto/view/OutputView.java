@@ -1,10 +1,8 @@
 package lotto.view;
 
-import lotto.model.*;
-
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import lotto.dto.LottoPurchaserDto;
+import lotto.dto.LottoWinningStatisticsDto;
+import lotto.model.Rank;
 
 public class OutputView {
     private static final String FORMAT_PURCHASE_COUNT = "%d개를 구매했습니다.\n";
@@ -14,43 +12,30 @@ public class OutputView {
     private static final String FORMAT_MATCH_COUNT = "%d개 일치";
     private static final String BONUS_BALL_SUFFIX = ", 보너스 볼 일치";
 
-    public void printLottoTickets(List<LottoTicket> lottoTickets, int purchaseAmount) {
-        System.out.printf(FORMAT_PURCHASE_COUNT, purchaseAmount / Lotto.UNIT_PRICE);
-        for (LottoTicket lottoTicket : lottoTickets) {
-            printLotto(lottoTicket.getLotto());
-        }
+    public void printLottoTickets(LottoPurchaserDto dto) {
+        System.out.printf(FORMAT_PURCHASE_COUNT, dto.purchaseCount());
+        dto.lottoNumbers().forEach(System.out::println);
     }
 
-    public void printWinningStatistics(LottoWinningStatistics lottoWinningStatistics) {
+    public void printWinningStatistics(LottoWinningStatisticsDto dto) {
         System.out.println(WINNING_STATISTICS_HEADER);
-        List<Rank> ranks = Arrays.stream(Rank.values())
-                .sorted(Comparator.comparingInt(Rank::getRank).reversed())
-                .filter(rank -> rank != Rank.MISS)
-                .toList();
+        printWinningDetail(dto);
 
-        printWinningDetail(lottoWinningStatistics, ranks);
-        System.out.printf(FORMAT_PROFIT_RATE, lottoWinningStatistics.calculateProfitRate());
+        System.out.printf(FORMAT_PROFIT_RATE, dto.profitRate());
     }
 
     public void printErrorMessage(String errorMessage) {
         System.out.println(errorMessage);
     }
 
-    private void printLotto(Lotto lotto) {
-        List<Integer> numbers = lotto.getNumbers().stream()
-                .sorted()
-                .toList();
-        System.out.println(numbers);
-    }
-
-    private void printWinningDetail(LottoWinningStatistics lottoWinningStatistics, List<Rank> ranks) {
-        for (Rank rank : ranks) {
+    private void printWinningDetail(LottoWinningStatisticsDto dto) {
+        for (Rank rank : dto.winningCounts().keySet()) {
             String matchCount = String.format(FORMAT_MATCH_COUNT, rank.getMatchCount());
             if (rank == Rank.SECOND_PLACE) {
                 matchCount += BONUS_BALL_SUFFIX;
             }
 
-            int count = lottoWinningStatistics.getWinningCount().getOrDefault(rank, 0);
+            int count = dto.winningCounts().getOrDefault(rank, 0);
             System.out.printf(FORMAT_WINNING_DETAIL, matchCount, rank.getPrize(), count);
         }
     }
