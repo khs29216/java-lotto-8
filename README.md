@@ -1,5 +1,40 @@
 # 우테코 8기 프리코스 3주차 - 로또
-
+## 클래스 설계
+```
+lotto/                                [프로젝트]
+├── Application.java                  [프로그램 진입점]
+│
+├── controller/                       [흐름 제어]
+│   └── Controller.java               [전체 실행 흐름 제어]
+│
+├── model/                            [비지니스 로직]
+│   ├── factory/                      [로또 생성 관리]
+│   │   ├── LottoFactory.java         [로또 생성 인터페이스]
+│   │   └── AutoLottoFactory.java     [자동 번호 생성 구현체]
+│   │
+│   ├── Lotto.java                    [로또 번호 관리]
+│   ├── LottoTicket.java              [로또 + 등수 관리]
+│   ├── LottoPurchaser.java           [로또 구매자 관리]
+│   ├── LottoWinningNumber.java       [당첨 번호 관리]
+│   ├── LottoWinningStatistics.java   [당첨 통계 및 수익률 계산]
+│   └── Rank.java                     [등수 정의 및 상금/일치 개수 정보]
+│  
+├── util/                             [검증 및 파싱 유틸리티]
+│   ├── InputValidator.java           [입력값 검증]
+│   ├── LottoNumberValidator.java     [로또 번호 범위 및 유효성 검증]
+│   └── NumberParser.java             [문자열 → 숫자/리스트 변환 및 검증]
+│ 
+├── dto/                              [View와의 데이터 전달용 객체]
+│   ├── LottoPurchaserDto.java        [구매한 로또 수량 및 번호 전달]
+│   └── LottoWinningStatisticDto.java [당첨 통계 및 수익률 전달]
+│
+├── constant/                         [상수 관리]
+│   └── ErrorMessage.java             [공통 에러 메시지 정의]
+│
+└── view/                             [입출력 처리]
+    ├── InputView.java                [사용자 입력 처리]
+    └── OutputView.java               [결과 출력 처리]
+```
 ## 기능 구현 목록
 ### 1. 입력
 #### 1-1. 로또 구입 금액 입력
